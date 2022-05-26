@@ -3,7 +3,8 @@ defmodule RepoxWeb.RepositoriesView do
 
   def render("index.json", %{repositories: repositories}) do
     %{
-      repositories: Enum.map(repositories, fn repository ->
+      repositories:
+        Enum.map(repositories, fn repository ->
           %{
             name: repository["name"],
             description: repository["description"],
