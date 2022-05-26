@@ -20,10 +20,11 @@ defmodule RepoxWeb.Router do
     get "/", PageController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", RepoxWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", RepoxWeb do
+    pipe_through :api
+
+    get "/repositories/:username", RepositoriesController, :index
+  end
 
   # Enables LiveDashboard only for development
   #
