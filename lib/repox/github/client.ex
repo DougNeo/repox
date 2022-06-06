@@ -4,12 +4,12 @@ defmodule Repox.Github.Client do
   alias Tesla.Env
   alias Repox.Error
 
-  @base_url "https://api.github.com/"
+  @base_url "https://api.github.com"
   plug Tesla.Middleware.JSON
   plug Tesla.Middleware.Headers, [{"user-agent", "Tesla"}]
 
-  def get_repo(user) do
-    (@base_url <> "users/" <> user <> "/repos")
+  def get_repo(url \\ @base_url, user) do
+    "#{url}/users/#{user}/repos"
     |> get()
     |> handle_get()
   end
@@ -24,11 +24,11 @@ defmodule Repox.Github.Client do
     {:ok, repos}
   end
 
-  defp handle_get({:ok, %Env{status: 403, body: body}}) do
-    {:ok, body["message"]}
-  end
-
   defp handle_get({:ok, %Env{status: 404, body: body}}) do
     {:error, Error.build(:not_found, "Usuario não encontrado")}
+  end
+
+  defp handle_get({:error, :econnrefused}) do
+    {:error, Error.build(:bad_request, ":econnrefused")}
   end
 end

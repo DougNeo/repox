@@ -32,3 +32,6 @@ repox-*.tar
 npm-debug.log
 /assets/node_modules/
 
+# Ignore the file for controller the version of the app.
+.tool-versions
+
