@@ -24,7 +24,7 @@ defmodule Repox.Github.Client do
     {:ok, repos}
   end
 
-  defp handle_get({:ok, %Env{status: 404, body: body}}) do
+  defp handle_get({:ok, %Env{status: 404, body: _body}}) do
     {:error, Error.build(:not_found, "Usuario não encontrado")}
   end
 
