@@ -14,6 +14,10 @@ defmodule RepoxWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+    plug RepoxWeb.Auth.Pipeline
+  end
+
   scope "/", RepoxWeb do
     pipe_through :browser
 
@@ -21,9 +25,17 @@ defmodule RepoxWeb.Router do
   end
 
   scope "/api", RepoxWeb do
-    pipe_through :api
+    pipe_through [:api, :auth]
 
     get "/repositories/:username", RepositoriesController, :index
+  end
+
+  scope "/api", RepoxWeb do
+    pipe_through :api
+
+    get "/", WelcomeController, :index
+    post "/users", UsersController, :create
+    post "/users/login", UsersController, :login
   end
 
   # Enables LiveDashboard only for development

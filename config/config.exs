@@ -10,6 +10,14 @@ import Config
 config :repox,
   ecto_repos: [Repox.Repo]
 
+config :repox, RepoxWeb.Auth.Guardian,
+  issuer: "repox",
+  secret_key: "3yKEQp/2ynACbBEwnFIELLzI5NUumVp72B0LB2i+Jh5pPozZnhHaiqxwTeA36q9o"
+
+config :repox, RepoxWeb.Auth.Pipeline,
+  module: RepoxWeb.Auth.Guardian,
+  error_handler: RepoxWeb.Auth.ErrorHandler
+
 # Configures the endpoint
 config :repox, RepoxWeb.Endpoint,
   url: [host: "localhost"],

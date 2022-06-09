@@ -16,7 +16,8 @@ defmodule Repox.Github.ClientTest do
 
       url = endpoint_url(bypass.port)
 
-      body = ~s([{"id": 393942628, "name": "Minishaw", "html_url": "https://github.com/Minishaw/Minishaw", "description": "Config files for my GitHub profile.", "stargazers_count": 0}])
+      body =
+        ~s([{"id": 393942628, "name": "Minishaw", "html_url": "https://github.com/Minishaw/Minishaw", "description": "Config files for my GitHub profile.", "stargazers_count": 0}])
 
       Bypass.expect(bypass, "GET", "/users/#{user}/repos", fn conn ->
         conn
@@ -28,15 +29,15 @@ defmodule Repox.Github.ClientTest do
 
       expected_response =
         {:ok,
-        [
-          %{
-            "description" => "Config files for my GitHub profile.",
-            "html_url" => "https://github.com/Minishaw/Minishaw",
-            "id" => 393_942_628,
-            "name" => "Minishaw",
-            "stargazers_count" => 0
-          }
-        ]}
+         [
+           %{
+             "description" => "Config files for my GitHub profile.",
+             "html_url" => "https://github.com/Minishaw/Minishaw",
+             "id" => 393_942_628,
+             "name" => "Minishaw",
+             "stargazers_count" => 0
+           }
+         ]}
 
       assert response == expected_response
     end
