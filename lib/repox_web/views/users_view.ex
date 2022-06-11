@@ -3,7 +3,7 @@ defmodule RepoxWeb.UsersView do
 
   alias Repox.User
 
-  def render("create.json", %{ user: user, token: token}) do
+  def render("create.json", %{user: user, token: token}) do
     %{id: user.id, token: token}
   end
 

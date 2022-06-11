@@ -1,6 +1,8 @@
 defmodule RepoxWeb.Router do
   use RepoxWeb, :router
 
+  alias RepoxWeb.Auth.Pipeline
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -15,7 +17,7 @@ defmodule RepoxWeb.Router do
   end
 
   pipeline :auth do
-    plug RepoxWeb.Auth.Pipeline
+    plug Pipeline
   end
 
   scope "/", RepoxWeb do

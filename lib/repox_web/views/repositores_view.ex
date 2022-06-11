@@ -1,7 +1,7 @@
 defmodule RepoxWeb.RepositoriesView do
   use RepoxWeb, :view
 
-  def render("index.json", %{repositories: repositories}) do
+  def render("index.json", %{repositories: repositories, new_token: new_token}) do
     %{
       repositories:
         Enum.map(repositories, fn repository ->
@@ -12,7 +12,8 @@ defmodule RepoxWeb.RepositoriesView do
             html_url: repository["html_url"],
             stargazers_count: repository["stargazers_count"]
           }
-        end)
+        end),
+      token: new_token
     }
   end
 end
